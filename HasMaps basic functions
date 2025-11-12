@@ -1,0 +1,51 @@
+class MyHashMap {
+public:
+
+    const int SIZE = 100;
+    vector<vector<pair<int,int>>>table;
+    MyHashMap() {
+      table.resize(SIZE);
+    }
+
+    void put(int key, int value) 
+    {
+        int index = key % SIZE;
+        for(auto &p:table[index])
+        {
+    if(p.first==key)
+    {
+    p.second=value;    
+        }
+    }
+    table[index].push_back({key,value});
+
+}
+    int get(int key) {
+        int index = key % SIZE;
+        for(auto &p:table[index]){
+            if(p.first==key){
+                return p.second;
+            }
+        }
+        return -1;
+    }
+
+    void remove(int key) {
+        int index = key % SIZE;
+        for(auto &p:table[index]){
+            if(p.first==key){
+                p.second=-1;
+                return;
+            }
+        }
+    }
+};
+
+
+/**
+ * Your MyHashMap object will be instantiated and called as such:
+ * MyHashMap* obj = new MyHashMap();
+ * obj->put(key,value);
+ * int param_2 = obj->get(key);
+ * obj->remove(key);
+ */
